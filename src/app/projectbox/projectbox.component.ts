@@ -15,7 +15,6 @@ export class ProjectboxComponent implements OnInit{
   route=''
   ngOnInit(): void {
     this.route='/Project/'+this.project.title
-    console.log(this.project)
 
   }
   

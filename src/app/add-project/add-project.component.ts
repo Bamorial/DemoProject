@@ -18,7 +18,8 @@ export class AddProjectComponent {
   ){
   }
   async Post(){
-   await this.projectService.Post(this.project) 
-   this.resetEvent.emit()
+   await this.projectService.Post(this.project).then(()=>{
+    this.resetEvent.emit()
+   })
   }
 }

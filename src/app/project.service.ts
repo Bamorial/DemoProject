@@ -26,13 +26,6 @@ export class ProjectService {
     return res as unknown as Project[]
     
    }
-   async GetById(title: string):Promise<Project>{
-    for(let i in this.portfolios){
-      if(this.portfolios[i].title==title)
-        return this.portfolios[i]
-    }
-    return new Project
-   }
    async Post(project:Project){
     const options = {
       method: 'POST',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../models/Project';
 import { ProjectService } from '../project.service';
 import { NgIf } from '@angular/common';
@@ -16,12 +16,15 @@ export class ProjectComponent implements OnInit{
   constructor(
     public route: ActivatedRoute,
     public projectService: ProjectService,
+    public router:Router
 
   ){
-
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state) {
+      this.project = navigation.extras.state['project'];
+      console.log(this.project)
+    }
   } 
   async ngOnInit(): Promise<void> {
-    let id= this.route.snapshot.paramMap.get('id')
-    this.project=await this.projectService.GetById(id as string)
   }
 }
