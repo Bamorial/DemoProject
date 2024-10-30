@@ -1,0 +1,7 @@
+<div  
+    class="bg-white border-black border-[3px]  p-4 rounded-md shadow-lg cursor-pointer" 
+    *ngIf="this.project.isVisible">
+    <div class="text-3xl ">{{this.project.title}}</div>
+    <div>{{this.project.description}}</div>
+    <a [href]="this.project.link" target="_blank" class="text-blue-400">{{this.project.link}}</a>
+</div>

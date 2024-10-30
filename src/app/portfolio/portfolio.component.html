@@ -1,1 +1,9 @@
-<p>portfolio works!</p>
+<div class="ml-8" >
+<button (click)="isAdd=!isAdd"class="bg-white border-[3px] border-black p-4 rounded-lg" >Add</button>
+<button class="bg-white border-[3px] border-black p-4 m-4 rounded-lg">Edit</button>
+<button class="bg-red-300 border-[3px] border-black p-4 m-4 rounded-lg" (click)="isDelete=!isDelete">Delete</button>
+<app-add-project *ngIf="isAdd" (resetEvent)="GetData()"></app-add-project>
+<app-projectbox class="m-4" *ngFor="let item of this.projects" [project]="item" (click)="OnClick(item.title)">
+
+</app-projectbox>
+</div>
