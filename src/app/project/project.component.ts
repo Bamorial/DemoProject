@@ -11,7 +11,7 @@ import { NgIf } from '@angular/common';
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
-export class ProjectComponent implements OnInit{
+export class ProjectComponent {
   project: Project
   constructor(
     public route: ActivatedRoute,
@@ -21,10 +21,8 @@ export class ProjectComponent implements OnInit{
   ){
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
-      this.project = navigation.extras.state['project'];
+      this.project = navigation.extras.state['project'];   //i already had this data on the other page so I haven't done another fetch
       console.log(this.project)
     }
   } 
-  async ngOnInit(): Promise<void> {
-  }
 }
