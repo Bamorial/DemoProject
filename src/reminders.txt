@@ -1,4 +1,0 @@
-1. Make the visible selection to do a put request in the api
-2. Add photos
-3. Do the project page
-4. Manage links

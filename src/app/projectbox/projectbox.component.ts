@@ -24,14 +24,13 @@ export class ProjectboxComponent implements OnInit{
   imageURL: string |ArrayBuffer | null=null
   ngOnInit(): void {
     this.route='/Project/'+this.project.title
+    let image: any= this.project.image
     if (this.project.image) {
-      console.log(this.project.image)
-      const blob = new Blob([this.project.image], { type: this.project.image.type });
+      const uint8Array = new Uint8Array(image.buffer.data);
+      const blob = new Blob([uint8Array], { type: image.mimetype });
       this.imageURL = URL.createObjectURL(blob);
-      console.log(this.imageURL)
     } 
 
-    
   }
   async Update(project: Project){
     try{

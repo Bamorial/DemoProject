@@ -4,5 +4,5 @@ export class Project{
     link: string
     shortDescription: string
     isVisible: boolean 
-    image?:File
+    image?: File
 }

@@ -12,16 +12,21 @@ import { ProjectService } from '../project.service';
 })
 export class AddProjectComponent {
   @Output() resetEvent= new EventEmitter<boolean>()
-  project: Project={title:'',shortDescription:'', description:'', link:'', isVisible:true, image:undefined}
+  project: Project={title:'',shortDescription:'', description:'', link:'', isVisible:true, image:new File([],'')}
   constructor(
     public projectService: ProjectService
   ){
   }
   async Post(){
-    console.log(this.project.image)
+    try{
    await this.projectService.Post(this.project).then(()=>{
     this.resetEvent.emit()
    })
+  }
+  catch(err){
+    console.log(err)
+    alert('There is an error')
+  }
   }
   onFileSelected(event: any) {
     this.project.image = event.target.files[0];

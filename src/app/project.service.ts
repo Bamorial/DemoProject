@@ -25,6 +25,7 @@ export class ProjectService {
         el.link='https://'+el.link
       }
     }
+
     return res as unknown as Project[]
     
    }
@@ -36,21 +37,18 @@ export class ProjectService {
     formData.append('link', project.link);
     formData.append('isVisible', project.isVisible.toString());
     if (project.image) {
-      console.log(project.image)
       formData.append('image', project.image);
+      console.log(project.image)
     }
     const options = {
       method: 'POST',
       url: 'http://localhost:3000/portfolios',
-      params: {title: 'hello'},
       headers: {'Content-Type': 'multipart/form-data'},
       data: formData
       };
     
     axios.request(options).then(function (response) {
-      console.log(response)
     }).catch(function (error) {
-      console.error(error);
     });
    }
    async Delete(title: string){

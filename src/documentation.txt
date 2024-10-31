@@ -1,7 +1,0 @@
-Portfolio page:
-    There are 3 buttons:
-        1. Add a new project - shows the "add new project dialogue"
-        2. Edit - reveals the hidden projects and also allows the user to set the visibility to true/false for each project using the checkbox in the right side of the card. After exiting the edit mode, the user will see only the visible items.
-        3. Delete - toggles the delete mode. In the delete mode if the user clicks on a project card, that one will be deleted
-
-        By default, by clicking on a card, the router will navigate to that project's page
