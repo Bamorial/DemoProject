@@ -29,22 +29,23 @@ export class PortfolioComponent implements OnInit{
     await this.GetData()
   }
   async GetData(){
-    this.projects= await this.projectService.GetAll()
-    this.projects=this.projects.reverse()
+    this.projects= await (await this.projectService.GetAll()).reverse()
     this.isAdd=false
-    this.cdr.detectChanges()
-    console.log(this.projects)
   }
   async OnClick(project: Project){
     if(this.isDelete){
-      await this.projectService.Delete(project.title).then(
-        async()=>{
-          this.projects.splice(this.projects.indexOf(project),1)
-        }
-      )
+      try{
+      await this.projectService.Delete(project.title)
+      this.projects.splice(this.projects.indexOf(project), 1)
       this.isDelete=!this.isDelete
+      }
+      catch(err){
+        console.log(err)
+        alert('There was an error')
+      }
     }
-    else{
+    else if(!this.isEdit){
+      console.log(project)
      this.router.navigateByUrl('/Project/'+project.title, {state:{project: project}}) 
     }
   }

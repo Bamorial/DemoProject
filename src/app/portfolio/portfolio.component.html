@@ -4,7 +4,7 @@
     <button [ngClass]="{selected:isDelete}" class="bg-red-300 border-[3px] border-black p-4 m-4 rounded-lg" (click)="isDelete=!isDelete">Delete</button>
     <app-add-project *ngIf="isAdd" (resetEvent)="GetData()"></app-add-project>
     <div *ngFor="let item of this.projects">
-        <app-projectbox *ngIf="item.isVisible || isEdit" class="m-4" [viewAll]="isEdit"  [project]="item" >
+        <app-projectbox *ngIf="item.isVisible || isEdit" class="m-4" [viewAll]="isEdit"  [project]="item" (click)="OnClick(item)" >
         </app-projectbox>
     </div>
 </div>

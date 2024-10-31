@@ -3,7 +3,11 @@
     <input [(ngModel)]="project.title" class="w-1/4 border-black border-[3px] rounded-md p-4" type="text" name="title">
     <label for="description">Description</label>
     <input [(ngModel)]="project.description" class="h-20 w-1/4 border-black border-[3px] p-4 rounded-md" type="text" name="description">
+    <label for="shortdescription">Short Description</label>
+    <input [(ngModel)]="project.shortDescription" class="h-20 w-1/4 border-black border-[3px] p-4 rounded-md" type="text" name="description">
     <label for="link">Link</label>
     <input [(ngModel)]="project.link" class="w-1/4 border-black border-[3px] rounded-md p-4" type="text" name="link">
+    <label for="image">Image</label>
+    <input (change)="onFileSelected($event)" class="w-1/4 bg-white border-black border-[3px] rounded-md p-4" type="file" name="image">
     <button class="self-start p-4 bg-red-300 border-[3px] border-black rounded-md mt-2 " (click)="Post()">Add</button>
 </div>

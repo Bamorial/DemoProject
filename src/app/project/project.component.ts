@@ -3,16 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../models/Project';
 import { ProjectService } from '../project.service';
 import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, FormsModule],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
 export class ProjectComponent {
   project: Project
+  isEdit=false
   constructor(
     public route: ActivatedRoute,
     public projectService: ProjectService,
@@ -25,4 +27,20 @@ export class ProjectComponent {
       console.log(this.project)
     }
   } 
+  async toggleEdit(){
+    if(!this.isEdit){
+      this.isEdit=!this.isEdit
+    }
+    else{
+      this.isEdit=!this.isEdit
+      try{
+        console.log(this.project.description)
+        await this.projectService.Put(this.project) 
+      }
+      catch(err){
+        console.log(err)
+        alert('There was an error')
+      }
+    }
+  }
 }

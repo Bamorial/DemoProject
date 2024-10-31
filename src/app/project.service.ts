@@ -6,10 +6,6 @@ import axios from 'axios';
   providedIn: 'root'
 })
 export class ProjectService {
-  portfolios: Project[]=[
-      { title: 'Project#1', description: 'This is the first', link:'www.hello.com', isVisible: true}, 
-      { title: 'Project#2', description: 'This is the second', link:'www.hello.com', isVisible: true}, 
-    ]
   constructor() { }
   async GetAll(){
     const options = {
@@ -22,24 +18,34 @@ export class ProjectService {
       return response.data
     }).catch(function (error) {
       console.error(error);
-    });
+    }) as unknown as Project[]
+    for(let el of res){
+      if(el.link)
+      if(!el.link.startsWith('htt')){
+        el.link='https://'+el.link
+      }
+    }
     return res as unknown as Project[]
     
    }
    async Post(project:Project){
+    const formData = new FormData();
+    formData.append('title', project.title);
+    formData.append('description', project.description);
+    formData.append('shortDescription', project.shortDescription);
+    formData.append('link', project.link);
+    formData.append('isVisible', project.isVisible.toString());
+    if (project.image) {
+      console.log(project.image)
+      formData.append('image', project.image);
+    }
     const options = {
       method: 'POST',
       url: 'http://localhost:3000/portfolios',
       params: {title: 'hello'},
-      headers: {'Content-Type': 'application/json'},
-      data: {
-        title: project.title,
-        description: project.description,
-        image:'',
-        link:project.link,
-        isVisible: true
-      }
-    };
+      headers: {'Content-Type': 'multipart/form-data'},
+      data: formData
+      };
     
     axios.request(options).then(function (response) {
       console.log(response)
@@ -60,5 +66,31 @@ export class ProjectService {
     }).catch(function (error) {
       console.error(error);
     });
+   }
+   async Put(project: Project){
+    const formData = new FormData();
+    formData.append('title', project.title);
+    formData.append('description', project.description);
+    formData.append('link', project.link);
+    formData.append('shortDescription', project.shortDescription);
+    formData.append('isVisible', project.isVisible.toString());
+    if (project.image) {
+      formData.append('image', project.image);
+    }
+    const options = {
+      method: 'PUT',
+      url: 'http://localhost:3000/portfolios',
+      headers: {'Content-Type': 'multipart/form-data'},
+      data: formData
+    };
+    
+    let res= await axios.request(options).then(function (response) {
+      console.log(response.data);
+      return response.data
+    }).catch(function (error) {
+      console.error(error);
+    });
+    return res
+
    }
 }
