@@ -12,4 +12,7 @@ body{
     font-style: normal;
     font-size: large;
   }
+.selected{
+    background-color: gray;
+}
   

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { Project } from '../models/Project';
 import { ProjectService } from '../project.service';
 import { ProjectboxComponent } from '../projectbox/projectbox.component';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AddProjectComponent } from '../add-project/add-project.component';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [FormsModule, ProjectboxComponent, NgFor, RouterLink, AddProjectComponent, NgIf],
+  imports: [FormsModule, ProjectboxComponent, NgFor, RouterLink, AddProjectComponent, NgIf, NgClass],
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.css'
 })
@@ -29,7 +29,6 @@ export class PortfolioComponent implements OnInit{
     await this.GetData()
   }
   async GetData(){
-    this.projects=[]
     this.projects= await this.projectService.GetAll()
     this.projects=this.projects.reverse()
     this.isAdd=false
@@ -40,7 +39,7 @@ export class PortfolioComponent implements OnInit{
     if(this.isDelete){
       await this.projectService.Delete(project.title).then(
         async()=>{
-          await this.GetData();
+          this.projects.splice(this.projects.indexOf(project),1)
         }
       )
       this.isDelete=!this.isDelete
