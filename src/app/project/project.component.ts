@@ -34,7 +34,6 @@ export class ProjectComponent implements OnInit {
       const uint8Array = new Uint8Array(image.buffer.data);
       const blob = new Blob([uint8Array], { type: image.mimetype });
       this.imageUrl = URL.createObjectURL(blob);
-      console.log(this.imageUrl)
     } 
   }
   async toggleEdit(){

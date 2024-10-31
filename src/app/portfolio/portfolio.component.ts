@@ -45,7 +45,6 @@ export class PortfolioComponent implements OnInit{
       }
     }
     else if(!this.isEdit){
-      console.log(project)
      this.router.navigateByUrl('/Project/'+project.title, {state:{project: project}}) 
     }
   }
