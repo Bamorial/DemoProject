@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class ProjectComponent {
   project: Project
   isEdit=false
+  editText='Edit'
   constructor(
     public route: ActivatedRoute,
     public projectService: ProjectService,
@@ -30,8 +31,10 @@ export class ProjectComponent {
   async toggleEdit(){
     if(!this.isEdit){
       this.isEdit=!this.isEdit
+      this.editText="Done"
     }
     else{
+      this.editText='Edit'
       this.isEdit=!this.isEdit
       try{
         console.log(this.project.description)
